@@ -1,0 +1,30 @@
+.verticalNav {
+  width: 200px;
+  height: 100vh;
+  background-color: var(--color--white);
+  border-right: 1px solid var(--color-true-grey-200);
+
+  &List {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &ListHeader {
+    padding: var(--spacing-2);
+    font: var(--label);
+    border-bottom: 1px solid var(--color-true-grey-200);
+    color: var(--color--primary-800);
+  }
+
+  &ListItem {
+    padding: var(--spacing-2);
+    font: var(--body-small);
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-true-grey-200);
+
+    &:hover {
+      background-color: var(--color-true-grey-50);
+    }
+  }
+}

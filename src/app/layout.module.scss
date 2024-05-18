@@ -1,0 +1,9 @@
+.body {
+  display: flex;
+  align-items: stretch;
+
+  &Content {
+    flex: 1;
+    background-color: var(--color--primary-50);
+  }
+}

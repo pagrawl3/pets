@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
+import VerticalNav from "@/components/VerticalNav";
+import Header from "@/components/Header";
+import styles from "./layout.module.scss";
 import "@/const/globals.scss";
+import clsx from "clsx";
 
 const workSans = Work_Sans({ subsets: ["latin"] });
 
@@ -16,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={workSans.className}>{children}</body>
+      <body className={clsx(styles.body, workSans.className)}>
+        <VerticalNav />
+        <div className={styles.bodyContent}>
+          <Header />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
