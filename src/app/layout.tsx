@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
-import VerticalNav from "@/components/VerticalNav";
-import Header from "@/components/Header";
+import VerticalNav from "@/components/ui/VerticalNav";
+import Header from "@/components/ui/Header";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
 import clsx from "clsx";

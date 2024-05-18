@@ -1,0 +1,7 @@
+.help {
+  font: var(--label-small);
+  margin: var(--spacing-1);
+  &.isError {
+    color: var(--token-color-Red-50);
+  }
+}
