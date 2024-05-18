@@ -1,0 +1,19 @@
+export const SIZES = {
+  SMALL: "SMALL",
+  MEDIUM: "MEDIUM",
+  LARGE: "LARGE",
+};
+
+export const VARIANTS = {
+  PRIMARY: "PRIMARY",
+  SECONDARY: "SECONDARY",
+  TEXT: "TEXT",
+  UNDERLINE: "UNDERLINE",
+};
+
+export const COLORS = {
+  BRAND: "BRAND",
+  DANGER: "DANGER",
+  SUCCESS: "SUCCESS",
+  NEUTRAL: "NEUTRAL",
+};
