@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.skills {
+  @media print {
+    clear: both;
+    page-break-after: always;
+  }
+}
