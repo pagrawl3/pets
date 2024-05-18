@@ -3,13 +3,18 @@
 import InputText from "@/components/inputs/InputText";
 import styles from "./page.module.scss";
 import useSearch from "@/hooks/useSearch";
+import useGetAllBreeds from "@/hooks/useGetAllBreeds";
 
-const items = [];
+const searchKeys = ["title"];
+
 export default function Home() {
+  const [breeds, loading] = useGetAllBreeds();
   const { searchResults, searchTerm, search } = useSearch({
-    items,
-    searchKeys: [],
+    items: breeds,
+    searchKeys,
   });
+
+  if (loading) return <h1>Loading...</h1>;
 
   return (
     <main className={styles.main}>
