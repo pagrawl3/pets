@@ -6,6 +6,7 @@ import useSearch from "@/hooks/useSearch";
 import InputText from "@/components/inputs/InputText";
 import BreedCard from "@/components/ui/BreedCard";
 import styles from "./page.module.scss";
+import Footer from "@/components/ui/Footer";
 
 const searchKeys = ["title"];
 
@@ -35,6 +36,10 @@ export default function Home() {
     });
   }, []);
 
+  const handleRemove = React.useCallback((slug: string) => {
+    setSelectedBreeds((prev) => prev.filter((breed) => breed.slug !== slug));
+  }, []);
+
   React.useEffect(() => {
     sessionStorage.setItem("selectedBreeds", JSON.stringify(selectedBreeds));
   }, [selectedBreeds]);
@@ -62,6 +67,10 @@ export default function Home() {
           ))}
         </ul>
       </main>
+      <Footer
+        onRemoveSelectedBreed={handleRemove}
+        selectedBreeds={selectedBreeds}
+      />
     </>
   );
 }
