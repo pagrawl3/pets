@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Work_Sans } from "next/font/google";
 import "@/const/globals.scss";
+
+const workSans = Work_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Dogs! 🐶",
@@ -13,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={workSans.className}>{children}</body>
     </html>
   );
 }
