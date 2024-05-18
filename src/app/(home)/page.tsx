@@ -1,24 +1,48 @@
 "use client";
 
-import InputText from "@/components/inputs/InputText";
-import styles from "./page.module.scss";
-import useSearch from "@/hooks/useSearch";
+import React from "react";
 import useGetAllBreeds from "@/hooks/useGetAllBreeds";
+import useSearch from "@/hooks/useSearch";
+import InputText from "@/components/inputs/InputText";
+import BreedCard from "@/components/ui/BreedCard";
+import styles from "./page.module.scss";
 
 const searchKeys = ["title"];
 
 export default function Home() {
   const [breeds, loading] = useGetAllBreeds();
+
+  const [selectedBreeds, setSelectedBreeds] = React.useState(() => {
+    const selectedBreeds = sessionStorage.getItem("selectedBreeds");
+    try {
+      return JSON.parse(selectedBreeds || "");
+    } catch (e) {
+      return [];
+    }
+  });
+
   const { searchResults, searchTerm, search } = useSearch({
     items: breeds,
     searchKeys,
   });
 
-  if (loading) return <h1>Loading...</h1>;
+  const handleSelect = React.useCallback((breed) => {
+    setSelectedBreeds((prev) => {
+      const exists = prev.find(({ slug }) => slug === breed.slug);
+      if (exists) return prev.filter(({ slug }) => slug !== breed.slug);
+      if (prev.length >= 3) return prev;
+      return [...prev, breed];
+    });
+  }, []);
 
+  React.useEffect(() => {
+    sessionStorage.setItem("selectedBreeds", JSON.stringify(selectedBreeds));
+  }, [selectedBreeds]);
+
+  if (loading) return <h1>Loading...</h1>;
   return (
-    <main className={styles.main}>
-      <div className={styles.body}>
+    <>
+      <main className={styles.main}>
         <InputText
           label="Search"
           placeholder="Start typing to search..."
@@ -26,7 +50,18 @@ export default function Home() {
           onChange={search}
           autoFocus
         />
-      </div>
-    </main>
+        <ul className={styles.breeds}>
+          {searchResults.map((item) => (
+            <BreedCard
+              slug={item.slug}
+              key={item.slug}
+              title={item.title}
+              onClick={handleSelect}
+              selected={!!selectedBreeds.find(({ slug }) => slug === item.slug)}
+            />
+          ))}
+        </ul>
+      </main>
+    </>
   );
 }

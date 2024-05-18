@@ -1,0 +1,129 @@
+.breedCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  flex: 1;
+  flex-basis: 10%;
+  max-width: calc(14.2857% - var(--spacing-3) * 2);
+  width: 100%;
+  height: 90px;
+  border: 1px solid var(--color-primary-700);
+  border: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  padding: var(--spacing-2);
+
+  &:hover {
+    border-color: var(--color-primary-400);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-400);
+  }
+
+  &.selected {
+    border-color: var(--color-primary-700);
+    .breedCardRadio {
+      background-color: var(--color-primary-700);
+      border-color: var(--color-primary-700);
+    }
+  }
+
+  &Image {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    margin: 0;
+    border-radius: 6px;
+    overflow: hidden;
+
+    img {
+      background-color: #000;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &Loading {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(#000, 0.9);
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.15s ease-in-out;
+      svg {
+        animation: rotate 1.5s infinite;
+
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        path {
+          fill: #fff;
+        }
+      }
+
+      &.active {
+        opacity: 0.9;
+        pointer-events: auto;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 10%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+  }
+
+  &Radio {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg path {
+      // fill: var(--color-primary-100);
+      fill: rgba(#000, 0.9);
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    position: relative;
+    font: var(--label);
+    color: #fff;
+    z-index: 2;
+    margin-top: auto;
+    text-transform: capitalize;
+    // white-space: nowrap;
+  }
+}
