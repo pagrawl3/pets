@@ -1,9 +1,13 @@
 .body {
   display: flex;
   align-items: stretch;
+  width: 100vw;
 
   &Content {
     flex: 1;
-    background-color: var(--color--primary-50);
+    background-color: var(--color-primary-50);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 }
