@@ -10,13 +10,11 @@ import FIREBASE_CONFIG from "@/const/firebaseConfig";
 export default function Signup() {
   const signup = React.useCallback(({ email, password }) => {
     initializeApp(FIREBASE_CONFIG);
-    createUserWithEmailAndPassword(getAuth(), email, password)
-      .then((userCredential) => {
-        console.log("user", userCredential);
-      })
-      .catch((error) => {
+    createUserWithEmailAndPassword(getAuth(), email, password).catch(
+      (error) => {
         console.log("err", error);
-      });
+      }
+    );
   }, []);
 
   return (
