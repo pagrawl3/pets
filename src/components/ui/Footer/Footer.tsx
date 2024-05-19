@@ -13,6 +13,8 @@ export default function Footer({
   selectedBreeds: Breed[];
   onRemoveSelectedBreed: (slug: string) => void;
 }>) {
+  const isSubmitDisabled =
+    selectedBreeds.length === 0 || selectedBreeds.length > 3;
   return (
     <footer className={styles.footer}>
       <div className={styles.footerLHS}>
@@ -35,16 +37,15 @@ export default function Footer({
           )}
         </span>
       </div>
-      <Link href="/feed">
-        <Button
-          className={styles.footerRHS}
-          variant={Button.VARIANTS.PRIMARY}
-          size={Button.SIZES.MEDIUM}
-          SuffixIcon={ChevronRightIcon}
-        >
-          View Feed
-        </Button>
-      </Link>
+      <Button
+        className={styles.footerRHS}
+        variant={Button.VARIANTS.PRIMARY}
+        size={Button.SIZES.MEDIUM}
+        disabled={isSubmitDisabled}
+        SuffixIcon={ChevronRightIcon}
+      >
+        <Link href={isSubmitDisabled ? "" : "/feed"}>View Feed</Link>
+      </Button>
     </footer>
   );
 }

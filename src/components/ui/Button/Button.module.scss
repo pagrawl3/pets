@@ -60,4 +60,20 @@
     font: var(--label);
     padding: calc(var(--spacing-1) + 2px) var(--spacing-3);
   }
+
+  &.DISABLED {
+    background-color: var(--color-primary-100);
+    border-color: var(--color-primary-100);
+    color: var(--color-black-20);
+    pointer-events: none;
+    cursor: not-allowed;
+    path {
+      fill: var(--color-black-20);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
