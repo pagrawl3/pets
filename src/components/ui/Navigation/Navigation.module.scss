@@ -1,0 +1,28 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &Text {
+    font: var(--label-small);
+  }
+
+  &Steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-2);
+    width: 100%;
+  }
+
+  &Step {
+    height: 4px;
+    border-radius: 1px;
+    flex: 1;
+    background-color: var(--color-true-grey-200);
+
+    &.active {
+      background-color: var(--color-primary-500);
+    }
+  }
+}

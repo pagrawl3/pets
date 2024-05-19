@@ -1,6 +1,16 @@
 import React from "react";
 import styles from "./Header.module.scss";
+import Navigation from "../Navigation";
+import { usePathname } from "next/navigation";
 
-export default function Header({}) {
-  return <div className={styles.header}>Select your favorite breeds</div>;
+const STEPS: string[] = ["Select your top 3 breeds", "View feed"];
+
+export default function Header() {
+  const pathname = usePathname();
+  const currentStep = pathname === "/feed" ? 1 : 0;
+  return (
+    <div className={styles.header}>
+      <Navigation steps={STEPS} value={currentStep} />
+    </div>
+  );
 }

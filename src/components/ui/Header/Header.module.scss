@@ -1,5 +1,10 @@
 .header {
   border-bottom: 1px solid var(--color-true-grey-200);
-  padding: var(--spacing-2);
+  padding: calc(var(--spacing-2) + 5px) var(--spacing-3);
   font: var(--label);
+  display: flex;
+  justify-content: center;
+  > * {
+    min-width: 300px;
+  }
 }
