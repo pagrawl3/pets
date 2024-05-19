@@ -1,0 +1,24 @@
+.loader {
+  display: flex;
+  align-items: center;
+  transition: 0.15s ease-in-out;
+  margin: 0 auto;
+  svg {
+    animation: rotate 1.5s infinite;
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    path {
+      fill: #000;
+    }
+  }
+
+  opacity: 0.9;
+  pointer-events: auto;
+}

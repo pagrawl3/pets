@@ -8,6 +8,7 @@ import BreedCard from "@/components/ui/BreedCard";
 import styles from "./page.module.scss";
 import Footer from "@/components/ui/Footer";
 import { Breed } from "@/const/types";
+import Loader from "@/components/ui/Loader";
 
 const searchKeys = ["title"];
 
@@ -47,7 +48,6 @@ export default function Home() {
     sessionStorage.setItem("selectedBreeds", JSON.stringify(selectedBreeds));
   }, [selectedBreeds]);
 
-  if (loading) return <h1>Loading...</h1>;
   return (
     <>
       <main className={styles.main}>
@@ -59,17 +59,21 @@ export default function Home() {
           autoFocus
         />
         <ul className={styles.breeds}>
-          {searchResults.map((item) => (
-            <BreedCard
-              slug={item.slug}
-              key={item.slug}
-              title={item.title}
-              onClick={handleSelect}
-              selected={
-                !!selectedBreeds.find(({ slug }: Breed) => slug === item.slug)
-              }
-            />
-          ))}
+          {loading ? (
+            <Loader />
+          ) : (
+            searchResults.map((item) => (
+              <BreedCard
+                slug={item.slug}
+                key={item.slug}
+                title={item.title}
+                onClick={handleSelect}
+                selected={
+                  !!selectedBreeds.find(({ slug }: Breed) => slug === item.slug)
+                }
+              />
+            ))
+          )}
         </ul>
       </main>
       <Footer

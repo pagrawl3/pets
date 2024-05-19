@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import useIsLoggedIn from "@/hooks/useIsLoggedIn";
+import Loader from "@/components/ui/Loader";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,6 @@ export default function RootLayout({
     else setLoading(false);
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   return children;
 }

@@ -9,6 +9,7 @@ import useIsLoggedIn from "@/hooks/useIsLoggedIn";
 import { UserContext } from "@/hooks/useUserContext";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
+import Loader from "@/components/ui/Loader";
 
 export default function RootLayout({
   children,
@@ -26,7 +27,7 @@ export default function RootLayout({
     }
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   return (
     <UserContext.Provider value={user}>
       <div className={clsx(styles.body)}>

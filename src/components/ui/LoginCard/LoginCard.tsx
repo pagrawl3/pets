@@ -21,46 +21,44 @@ export default function LoginCard({
   const isLogin = type === "LOGIN";
 
   return (
-    <main className={styles.main}>
-      <Card className={styles.card}>
-        <div>
-          <h1>{isLogin ? "Login" : "Signup"}</h1>
-          <h3>Your favorite dog app 🐶</h3>
-        </div>
-        <div>
-          <InputText
-            value={email}
-            onChange={setEmail}
-            label="Email"
-            error={error.email}
-          />
-          <InputText
-            value={password}
-            onChange={setPassword}
-            label="Password"
-            type="password"
-            error={error.password}
-          />
-        </div>
-        <div>
-          <Button
-            onClick={() => onSubmit({ email, password })}
-            variant={Button.VARIANTS.PRIMARY}
-            size={Button.SIZES.LARGE}
-          >
-            Login
-          </Button>
-        </div>
-        {isLogin ? (
-          <span>
-            Not a user yet? <Link href="/signup">Signup</Link>
-          </span>
-        ) : (
-          <span>
-            Already a user? <Link href="/login">Login</Link>
-          </span>
-        )}
-      </Card>
-    </main>
+    <Card className={styles.card}>
+      <div>
+        <h1>{isLogin ? "Login" : "Signup"}</h1>
+        <h3>Your favorite dog app 🐶</h3>
+      </div>
+      <div>
+        <InputText
+          value={email}
+          onChange={setEmail}
+          label="Email"
+          error={error.email}
+        />
+        <InputText
+          value={password}
+          onChange={setPassword}
+          label="Password"
+          type="password"
+          error={error.password}
+        />
+      </div>
+      <div>
+        <Button
+          onClick={() => onSubmit({ email, password })}
+          variant={Button.VARIANTS.PRIMARY}
+          size={Button.SIZES.LARGE}
+        >
+          Login
+        </Button>
+      </div>
+      {isLogin ? (
+        <span>
+          Not a user yet? <Link href="/signup">Signup</Link>
+        </span>
+      ) : (
+        <span>
+          Already a user? <Link href="/login">Login</Link>
+        </span>
+      )}
+    </Card>
   );
 }
