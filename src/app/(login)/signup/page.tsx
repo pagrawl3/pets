@@ -9,12 +9,40 @@ import FIREBASE_CONFIG from "@/const/firebaseConfig";
 import { LoginInput } from "@/const/types";
 
 export default function Signup() {
+  const [error, setError] = React.useState<{
+    email?: string;
+    password?: string;
+  }>({});
+
   const signup = React.useCallback(
     ({ email, password }: Readonly<LoginInput>) => {
+      if (!email)
+        return setError((e) => ({ ...e, email: "Email is required" }));
+      if (!password)
+        return setError((e) => ({ ...e, password: "Password is required" }));
       initializeApp(FIREBASE_CONFIG);
       createUserWithEmailAndPassword(getAuth(), email, password).catch(
         (error) => {
-          console.log("err", error);
+          switch (error.code) {
+            case "auth/invalid-email":
+              setError((e) => ({ email: "Invalid email" }));
+              break;
+            case "auth/weak-password":
+              setError((e) => ({
+                password: "Password should be > 6 characters",
+              }));
+              break;
+            case "auth/email-already-in-use":
+              setError((e) => ({
+                email: "Email already in use",
+              }));
+              break;
+            case "auth/invalid-credential":
+              setError((e) => ({ password: "Invalid credentials" }));
+              break;
+            default:
+              setError((e) => ({ email: "Something went wrong" }));
+          }
         }
       );
     },
@@ -23,7 +51,7 @@ export default function Signup() {
 
   return (
     <main className={styles.main}>
-      <LoginCard type="SIGNUP" onSubmit={signup} />
+      <LoginCard type="SIGNUP" onSubmit={signup} error={error} />
     </main>
   );
 }

@@ -10,9 +10,11 @@ import styles from "./LoginCard.module.scss";
 export default function LoginCard({
   type = "LOGIN",
   onSubmit,
+  error,
 }: Readonly<{
   type?: "LOGIN" | "SIGNUP";
   onSubmit: (data: { email: string; password: string }) => void;
+  error: { email?: string; password?: string };
 }>) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -26,12 +28,18 @@ export default function LoginCard({
           <h3>Your favorite dog app 🐶</h3>
         </div>
         <div>
-          <InputText value={email} onChange={setEmail} label="Email" />
+          <InputText
+            value={email}
+            onChange={setEmail}
+            label="Email"
+            error={error.email}
+          />
           <InputText
             value={password}
             onChange={setPassword}
             label="Password"
             type="password"
+            error={error.password}
           />
         </div>
         <div>

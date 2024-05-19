@@ -9,11 +9,29 @@ import FIREBASE_CONFIG from "@/const/firebaseConfig";
 import { LoginInput } from "@/const/types";
 
 export default function Login() {
+  const [error, setError] = React.useState<{
+    email?: string;
+    password?: string;
+  }>({});
+
   const login = React.useCallback(
     ({ email, password }: Readonly<LoginInput>) => {
+      if (!email)
+        return setError((e) => ({ ...e, email: "Email is required" }));
+      if (!password)
+        return setError((e) => ({ ...e, password: "Password is required" }));
       initializeApp(FIREBASE_CONFIG);
       signInWithEmailAndPassword(getAuth(), email, password).catch((error) => {
-        console.log("err", error);
+        switch (error.code) {
+          case "auth/invalid-email":
+            setError((e) => ({ email: "Invalid email" }));
+            break;
+          case "auth/invalid-credential":
+            setError((e) => ({ password: "Invalid credentials" }));
+            break;
+          default:
+            setError((e) => ({ email: "Something went wrong" }));
+        }
       });
     },
     []
@@ -21,7 +39,7 @@ export default function Login() {
 
   return (
     <main className={styles.main}>
-      <LoginCard type="LOGIN" onSubmit={login} />
+      <LoginCard type="LOGIN" onSubmit={login} error={error} />
     </main>
   );
 }
