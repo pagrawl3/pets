@@ -102,8 +102,8 @@ function InputField({
 }>) {
   const input = (
     <input
-      // autoFocus={autoFocus}
-      // name={name}
+      autoFocus={autoFocus}
+      name={name}
       value={value}
       onChange={(e) => onChange(e.target.value, e)}
       placeholder={placeholder}
