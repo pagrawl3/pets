@@ -36,8 +36,8 @@ export default function Button({
       onClick={!disabled && onClick ? onClick : undefined}
       className={clsx(
         styles.button,
-        styles[SIZES[size]],
-        styles[VARIANTS[variant]],
+        styles[SIZES[size as keyof typeof SIZES]],
+        styles[VARIANTS[variant as keyof typeof VARIANTS]],
         { [styles.LOADING]: loading },
         { [styles.DISABLED]: disabled },
         className

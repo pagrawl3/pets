@@ -10,16 +10,17 @@ import useUserContext from "@/hooks/useUserContext";
 import useGetLikes from "@/hooks/useGetLikes";
 import FeedHeader from "@/components/ui/FeedHeader";
 import Button from "@/components/ui/Button";
+import { Breed } from "@/const/types";
 
 export default function Feed() {
   const [timestamp, setTimestamp] = React.useState(Date.now());
   const user = useUserContext();
-  const likes = useGetLikes({ userId: user.uid });
+  const likes = useGetLikes({ userId: user?.uid });
 
   const selectedBreeds = React.useMemo(() => {
     const selectedBreeds = sessionStorage.getItem("selectedBreeds");
     try {
-      return JSON.parse(selectedBreeds || "");
+      return JSON.parse(selectedBreeds || "") as Breed[];
     } catch (e) {
       return [];
     }

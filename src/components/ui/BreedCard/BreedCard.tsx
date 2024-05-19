@@ -1,10 +1,11 @@
 import React from "react";
-import Card from "../Card";
-import styles from "./BreedCard.module.scss";
+import clsx from "clsx";
 import LoadingIcon from "@/icons/loading.svg";
 import TickIcon from "@/icons/tick.svg";
-import clsx from "clsx";
 import useGetDogImage from "@/hooks/useGetDogImage";
+import { Breed } from "@/const/types";
+import Card from "../Card";
+import styles from "./BreedCard.module.scss";
 
 export default function BreedCard({
   slug,
@@ -14,7 +15,7 @@ export default function BreedCard({
 }: Readonly<{
   slug: string;
   title: string;
-  onClick: (breed: { slug: string; src: string; title: string }) => void;
+  onClick: (breed: Breed) => void;
   selected: boolean;
 }>) {
   const { src, loading, onLoad } = useGetDogImage({ slug });

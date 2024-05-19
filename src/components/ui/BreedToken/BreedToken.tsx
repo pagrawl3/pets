@@ -11,7 +11,7 @@ export default function BreedToken({
 }: Readonly<{
   slug: string;
   title: string;
-  src: string;
+  src?: string;
   onRemove?: (slug: string) => void;
 }>) {
   return (

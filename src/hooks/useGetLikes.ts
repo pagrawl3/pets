@@ -5,11 +5,7 @@ import React from "react";
 
 export default function useGetLikes({
   userId,
-  url,
-}: Readonly<{
-  userId: string | null;
-  url: string;
-}>): string[] {
+}: Readonly<{ userId?: string | null }>): string[] {
   const [likes, setLikes] = React.useState([]);
   React.useEffect(() => {
     if (!userId) return;
@@ -18,7 +14,7 @@ export default function useGetLikes({
     getDoc(doc(db, userId, "likes")).then((docSnap) =>
       docSnap.exists() ? setLikes(docSnap.data().likes) : setLikes([])
     );
-  }, [url, userId]);
+  }, [userId]);
 
   return likes;
 }

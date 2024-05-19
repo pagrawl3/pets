@@ -1,15 +1,16 @@
 import React from "react";
+import Link from "next/link";
+import { Breed } from "@/const/types";
+import ChevronRightIcon from "@/icons/chevron-right.svg";
 import BreedToken from "../BreedToken";
 import Button from "../Button";
-import ChevronRightIcon from "@/icons/chevron-right.svg";
 import styles from "./Footer.module.scss";
-import Link from "next/link";
 
 export default function Footer({
   selectedBreeds,
   onRemoveSelectedBreed,
 }: Readonly<{
-  selectedBreeds: { slug: string; title: string; src: string }[];
+  selectedBreeds: Breed[];
   onRemoveSelectedBreed: (slug: string) => void;
 }>) {
   return (

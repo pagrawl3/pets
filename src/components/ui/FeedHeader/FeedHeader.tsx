@@ -3,11 +3,12 @@ import BreedToken from "../BreedToken";
 import styles from "./FeedHeader.module.scss";
 import Link from "next/link";
 import Button from "../Button";
+import { Breed } from "@/const/types";
 
 export default function FeedHeader({
   selectedBreeds,
 }: Readonly<{
-  selectedBreeds: { slug: string; title: string; src: string }[];
+  selectedBreeds: Breed[];
 }>) {
   return (
     <header className={styles.feedHeader}>

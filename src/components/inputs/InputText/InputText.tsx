@@ -38,12 +38,18 @@ const InputText = ({
   const Input = inputComponent || InputField;
 
   const handleFocus = React.useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => setFocused(true) + onFocus?.(e),
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      setFocused(true);
+      onFocus?.(e);
+    },
     [onFocus]
   );
 
   const handleBlur = React.useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => setFocused(false) + onBlur?.(e),
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      setFocused(false);
+      onBlur?.(e);
+    },
     [onBlur]
   );
 

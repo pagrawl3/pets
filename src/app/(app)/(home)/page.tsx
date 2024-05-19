@@ -7,6 +7,7 @@ import InputText from "@/components/inputs/InputText";
 import BreedCard from "@/components/ui/BreedCard";
 import styles from "./page.module.scss";
 import Footer from "@/components/ui/Footer";
+import { Breed } from "@/const/types";
 
 const searchKeys = ["title"];
 
@@ -27,8 +28,8 @@ export default function Home() {
     searchKeys,
   });
 
-  const handleSelect = React.useCallback((breed) => {
-    setSelectedBreeds((prev) => {
+  const handleSelect = React.useCallback((breed: Readonly<Breed>) => {
+    setSelectedBreeds((prev: Breed[]) => {
       const exists = prev.find(({ slug }) => slug === breed.slug);
       if (exists) return prev.filter(({ slug }) => slug !== breed.slug);
       if (prev.length >= 3) return prev;
@@ -37,7 +38,9 @@ export default function Home() {
   }, []);
 
   const handleRemove = React.useCallback((slug: string) => {
-    setSelectedBreeds((prev) => prev.filter((breed) => breed.slug !== slug));
+    setSelectedBreeds((prev: Breed[]) =>
+      prev.filter((breed) => breed.slug !== slug)
+    );
   }, []);
 
   React.useEffect(() => {
@@ -62,7 +65,9 @@ export default function Home() {
               key={item.slug}
               title={item.title}
               onClick={handleSelect}
-              selected={!!selectedBreeds.find(({ slug }) => slug === item.slug)}
+              selected={
+                !!selectedBreeds.find(({ slug }: Breed) => slug === item.slug)
+              }
             />
           ))}
         </ul>

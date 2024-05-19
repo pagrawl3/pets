@@ -6,7 +6,7 @@ const Cache = {} as Record<string, string>;
 export default function useGetDogImage({
   slug,
   query = 1,
-}: Readonly<{ slug: string; query: number }>): {
+}: Readonly<{ slug: string; query?: number }>): {
   src: string;
   loading: boolean;
   onLoad: () => void;
