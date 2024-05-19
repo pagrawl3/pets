@@ -11,6 +11,7 @@
 .breeds {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   justify-content: flex-start;
   gap: var(--spacing-3);
   padding: 0;

@@ -5,7 +5,13 @@ import FeedCard from "@/components/ui/FeedCard";
 import styles from "./page.module.scss";
 import FIREBASE_CONFIG from "@/const/firebaseConfig";
 import { initializeApp } from "firebase/app";
-import { arrayUnion, doc, getFirestore, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
 import useUserContext from "@/hooks/useUserContext";
 import useGetLikes from "@/hooks/useGetLikes";
 import FeedHeader from "@/components/ui/FeedHeader";
@@ -32,10 +38,13 @@ export default function Feed() {
 
       const app = initializeApp(FIREBASE_CONFIG);
       const db = getFirestore(app);
+      const key = url.split("/").slice(-2).join("/");
 
-      await updateDoc(doc(db, user.uid, "likes"), {
-        likes: arrayUnion(url.split("/").slice(-2).join("/")),
-      });
+      await setDoc(
+        doc(db, user.uid, "likes"),
+        isLike ? { likes: arrayUnion(key) } : { likes: arrayRemove(key) },
+        { merge: true }
+      );
     },
     [user]
   );
