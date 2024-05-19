@@ -8,10 +8,13 @@
   gap: var(--spacing-2);
 
   &Cta {
-    margin-left: var(--spacing-2);
+    margin-left: auto;
   }
 
   @media screen and (max-width: 768px) {
     border-bottom: 1px solid var(--color-true-grey-200);
+    .feedHeaderCta {
+      margin-left: var(--spacing-2);
+    }
   }
 }
