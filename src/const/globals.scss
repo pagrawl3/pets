@@ -1,7 +1,13 @@
 :root {
+  @font-face {
+    font-family: "FuturaPTDemi";
+    src: url("/futuraPt.woff2") format("woff2"),
+      url("/futuraPt.woff") format("woff");
+  }
+
   --max-width: 1100px;
   --border-radius: 12px;
-  --font: "Futura", Futura, sans-serif;
+  --font: "FuturaPTDemi", Futura, sans-serif;
   --font-alt: "__Work_Sans_1fc36d", "__Work_Sans_Fallback_1fc36d", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     Liberation Mono, Courier New, monospace;
