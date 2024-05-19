@@ -11,12 +11,26 @@ import styles from "./FeedCard.module.scss";
 export default function FeedCardContainer({
   slug,
   query,
+  likes,
+  onLike,
 }: Readonly<{
   slug: string;
   query: number;
+  likes: string[];
+  onLike: (url: string, isLike: boolean) => void;
 }>) {
   const { src, loading, onLoad } = useGetDogImage({ slug, query });
-  return <FeedCard slug={slug} src={src} loading={loading} onLoad={onLoad} />;
+  const srcId = src.split("/").slice(-2).join("/");
+  return (
+    <FeedCard
+      slug={slug}
+      src={src}
+      loading={loading}
+      onLoad={onLoad}
+      liked={likes.includes(srcId)}
+      onLike={onLike}
+    />
+  );
 }
 
 function FeedCard({
@@ -24,14 +38,28 @@ function FeedCard({
   src,
   loading,
   onLoad,
+  onLike,
+  liked,
 }: Readonly<{
   slug: string;
   src: string;
   loading: boolean;
   onLoad: () => void;
+  onLike: (url: string, isLike: boolean) => void;
+  liked: boolean;
 }>) {
+  const [optimisticLiked, setOptimisticLiked] = React.useState(liked);
+  const handleLike = React.useCallback(() => {
+    setOptimisticLiked((prev: boolean) => !prev);
+    onLike(src, !optimisticLiked);
+  }, [onLike, optimisticLiked, src]);
+
+  React.useEffect(() => {
+    setOptimisticLiked(liked);
+  }, [liked, src]);
+
   return (
-    <Card className={styles.feedCard}>
+    <Card className={styles.feedCard} onClick={handleLike}>
       <div className={styles.feedCardImage}>
         <img src={src} alt={slug} onLoad={onLoad} />
         <div
@@ -46,8 +74,9 @@ function FeedCard({
         <span>{slug}</span>
         <div className={styles.feedCardCtas}>
           <HeartIcon
-            src={HeartIcon}
-            className={clsx(styles.feedCardCta, styles.like)}
+            className={clsx(styles.feedCardCta, styles.like, {
+              [styles.liked]: optimisticLiked,
+            })}
           />
         </div>
       </div>

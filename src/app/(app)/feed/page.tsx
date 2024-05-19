@@ -2,12 +2,19 @@
 
 import React from "react";
 import FeedCard from "@/components/ui/FeedCard";
+import styles from "./page.module.scss";
+import FIREBASE_CONFIG from "@/const/firebaseConfig";
+import { initializeApp } from "firebase/app";
+import { arrayUnion, doc, getFirestore, updateDoc } from "firebase/firestore";
+import useUserContext from "@/hooks/useUserContext";
+import useGetLikes from "@/hooks/useGetLikes";
 import FeedHeader from "@/components/ui/FeedHeader";
 import Button from "@/components/ui/Button";
-import styles from "./page.module.scss";
 
 export default function Feed() {
   const [timestamp, setTimestamp] = React.useState(Date.now());
+  const user = useUserContext();
+  const likes = useGetLikes({ userId: user.uid });
 
   const selectedBreeds = React.useMemo(() => {
     const selectedBreeds = sessionStorage.getItem("selectedBreeds");
@@ -17,6 +24,20 @@ export default function Feed() {
       return [];
     }
   }, []);
+
+  const handleLike = React.useCallback(
+    async (url: string, isLike: boolean) => {
+      if (!user) return;
+
+      const app = initializeApp(FIREBASE_CONFIG);
+      const db = getFirestore(app);
+
+      await updateDoc(doc(db, user.uid, "likes"), {
+        likes: arrayUnion(url.split("/").slice(-2).join("/")),
+      });
+    },
+    [user]
+  );
 
   React.useEffect(() => {
     const refresh = (e: KeyboardEvent) =>
@@ -34,6 +55,8 @@ export default function Feed() {
             key={`${breed.slug}`}
             slug={`${breed.slug}`}
             query={timestamp}
+            onLike={handleLike}
+            likes={likes}
           />
         ))}
       </ul>
