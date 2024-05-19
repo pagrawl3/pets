@@ -74,6 +74,10 @@
   position: absolute;
   top: var(--spacing-4);
   left: var(--spacing-3);
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 }
 
 .verticalNavOverlay {
