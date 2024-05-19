@@ -8,8 +8,15 @@
     flex: 1;
     max-width: 100%;
     background-color: var(--color-primary-50);
+    min-height: 100vh;
+    max-height: 100vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      min-height: -webkit-fill-available;
+      max-height: -webkit-fill-available;
+    }
   }
 }

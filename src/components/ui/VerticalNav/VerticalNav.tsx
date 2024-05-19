@@ -8,10 +8,12 @@ export default function VerticalNav({}) {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <HamburgerIcon
-        className={styles.hamburger}
-        onClick={() => setOpen((t) => !t)}
-      />
+      <div className={styles.hamburger}>
+        <HamburgerIcon
+          className={styles.hamburgerIcon}
+          onClick={() => setOpen((t) => !t)}
+        />
+      </div>
       <div
         onClick={() => setOpen(false)}
         className={clsx(styles.verticalNavOverlay, { [styles.isOpen]: open })}

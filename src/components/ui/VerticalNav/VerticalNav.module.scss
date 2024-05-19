@@ -72,9 +72,10 @@
 
 .hamburger {
   position: absolute;
-  top: var(--spacing-4);
-  left: var(--spacing-3);
+  top: 8px;
+  left: var(--spacing-2);
   display: none;
+  padding: var(--spacing-3);
   @media screen and (max-width: 768px) {
     display: block;
   }

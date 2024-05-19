@@ -8,7 +8,7 @@
   gap: var(--spacing-2);
 
   &Cta {
-    margin-left: auto;
+    margin-left: var(--spacing-2);
   }
 
   @media screen and (max-width: 768px) {

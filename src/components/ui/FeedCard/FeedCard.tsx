@@ -60,7 +60,7 @@ function FeedCard({
 
   return (
     <Card className={styles.feedCard} onClick={handleLike}>
-      <div className={styles.feedCardImage}>
+      <figure className={styles.feedCardImage}>
         <img src={src} alt={slug} onLoad={onLoad} />
         <div
           className={clsx(styles.feedCardImageLoading, {
@@ -69,7 +69,7 @@ function FeedCard({
         >
           <LoadingIcon />
         </div>
-      </div>
+      </figure>
       <div className={styles.feedCardInfo}>
         <span>{slug}</span>
         <div className={styles.feedCardCtas}>
