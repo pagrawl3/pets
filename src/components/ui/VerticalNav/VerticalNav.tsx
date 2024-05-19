@@ -1,17 +1,30 @@
 import React from "react";
-import styles from "./VerticalNav.module.scss";
 import Link from "next/link";
+import clsx from "clsx";
+import HamburgerIcon from "@/icons/hamburger.svg";
+import styles from "./VerticalNav.module.scss";
 
 export default function VerticalNav({}) {
+  const [open, setOpen] = React.useState(false);
   return (
-    <nav className={styles.verticalNav}>
-      <ul className={styles.verticalNavList}>
-        <li className={styles.verticalNavListHeader}>DOGS! 🐶</li>
-        <li className={styles.verticalNavListItem}>Home</li>
-        <li className={styles.verticalNavListItemLast}>
-          <Link href="/logout">Logout</Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <HamburgerIcon
+        className={styles.hamburger}
+        onClick={() => setOpen((t) => !t)}
+      />
+      <div
+        onClick={() => setOpen(false)}
+        className={clsx(styles.verticalNavOverlay, { [styles.isOpen]: open })}
+      />
+      <nav className={clsx(styles.verticalNav, { [styles.isOpen]: open })}>
+        <ul className={styles.verticalNavList}>
+          <li className={styles.verticalNavListHeader}>DOGS! 🐶</li>
+          <li className={styles.verticalNavListItem}>Home</li>
+          <li className={styles.verticalNavListItemLast}>
+            <Link href="/logout">Logout</Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }
