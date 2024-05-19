@@ -1,9 +1,11 @@
-import React from "react";
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
+import VerticalNav from "@/components/ui/VerticalNav";
+import Header from "@/components/ui/Header";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
 import clsx from "clsx";
+
 const workSans = Work_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,8 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={clsx(styles.body, workSans.className)}>{children}</body>
-    </html>
+    <div className={clsx(styles.body)}>
+      <VerticalNav />
+      <div className={styles.bodyContent}>
+        <Header />
+        {children}
+      </div>
+    </div>
   );
 }
