@@ -1,30 +1,41 @@
-import type { Metadata } from "next";
-import { Work_Sans } from "next/font/google";
+"use client";
+
+import React from "react";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import VerticalNav from "@/components/ui/VerticalNav";
 import Header from "@/components/ui/Header";
+import useIsLoggedIn from "@/hooks/useIsLoggedIn";
+import { UserContext } from "@/hooks/useUserContext";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
-import clsx from "clsx";
-
-const workSans = Work_Sans({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Dogs! 🐶",
-  description: "Your favorite app to view your favorite dogs! 🐶",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(true);
+  const [user, setUser] = React.useState(null);
+  useIsLoggedIn((user) => {
+    if (!user) router.push("/login");
+    else {
+      setLoading(false);
+      setUser(user);
+    }
+  });
+
+  if (loading) return <div>Loading...</div>;
   return (
-    <div className={clsx(styles.body)}>
-      <VerticalNav />
-      <div className={styles.bodyContent}>
-        <Header />
-        {children}
+    <UserContext.Provider value={user}>
+      <div className={clsx(styles.body)}>
+        <VerticalNav />
+        <div className={styles.bodyContent}>
+          <Header />
+          {children}
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 }
