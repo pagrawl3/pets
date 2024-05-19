@@ -3,15 +3,26 @@
   border-top: 1px solid var(--color-true-grey-300);
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+
+  button {
+    white-space: nowrap;
+  }
 
   &LHS {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: var(--spacing-2);
   }
 
   &Message {
     font: var(--label);
     color: var(--color-true-grey-400);
+
+    @media screen and (max-width: 768px) {
+      font: var(--label-small);
+    }
   }
 }

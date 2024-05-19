@@ -4,9 +4,14 @@
 
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--spacing-2);
 
   &Cta {
     margin-left: auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    border-bottom: 1px solid var(--color-true-grey-200);
   }
 }

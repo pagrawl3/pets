@@ -74,6 +74,15 @@
   --spacing-5: 40px;
   --spacing-6: 48px;
 
+  @media screen and (max-width: 768px) {
+    --spacing-1: 4px;
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+    --spacing-4: 24px;
+    --spacing-5: 32px;
+    --spacing-6: 48px;
+  }
+
   // typography
   --h1: 500 32px/40px var(--font);
   --h2: 500 24px/36px var(--font);

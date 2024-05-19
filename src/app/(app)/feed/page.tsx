@@ -60,14 +60,16 @@ export default function Feed() {
           />
         ))}
       </ul>
-      <Button
-        variant={Button.VARIANTS.SECONDARY}
-        size={Button.SIZES.MEDIUM}
-        className={styles.shuffle}
-        onClick={() => setTimestamp(Date.now())}
-      >
-        Shuffle 🔀 (Spacebar)
-      </Button>
+      <div className={styles.feedFooter}>
+        <Button
+          variant={Button.VARIANTS.SECONDARY}
+          size={Button.SIZES.MEDIUM}
+          className={styles.shuffle}
+          onClick={() => setTimestamp(Date.now())}
+        >
+          Shuffle 🔀 (Spacebar)
+        </Button>
+      </div>
     </main>
   );
 }

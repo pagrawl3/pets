@@ -15,6 +15,11 @@
   cursor: pointer;
   padding: var(--spacing-2);
 
+  @media screen and (max-width: 768px) {
+    flex-basis: calc(40% - var(--spacing-3) * 1);
+    max-width: calc(50% - var(--spacing-3) * 1);
+  }
+
   &:hover {
     border-color: var(--color-primary-400);
   }

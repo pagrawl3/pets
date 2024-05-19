@@ -2,9 +2,11 @@
   display: flex;
   align-items: stretch;
   width: 100vw;
+  overflow: hidden;
 
   &Content {
     flex: 1;
+    max-width: 100%;
     background-color: var(--color-primary-50);
     height: 100vh;
     display: flex;
