@@ -7,6 +7,7 @@ import LoginCard from "@/components/ui/LoginCard";
 import styles from "./page.module.scss";
 import FIREBASE_CONFIG from "@/const/firebaseConfig";
 import { LoginInput } from "@/const/types";
+import { metricpilot } from "@/lib/metricpilot";
 
 export default function Signup() {
   const [error, setError] = React.useState<{
@@ -21,8 +22,17 @@ export default function Signup() {
       if (!password)
         return setError((e) => ({ ...e, password: "Password is required" }));
       initializeApp(FIREBASE_CONFIG);
-      createUserWithEmailAndPassword(getAuth(), email, password).catch(
-        (error) => {
+      createUserWithEmailAndPassword(getAuth(), email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          metricpilot.identify(user.uid, {
+            email: user.email || email,
+          });
+          metricpilot.capture("Account Created", {
+            signup_method: "email/password",
+          });
+        })
+        .catch((error) => {
           switch (error.code) {
             case "auth/invalid-email":
               setError((e) => ({ email: "Invalid email" }));

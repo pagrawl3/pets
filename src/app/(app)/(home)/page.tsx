@@ -3,16 +3,19 @@
 import React from "react";
 import useGetAllBreeds from "@/hooks/useGetAllBreeds";
 import useSearch from "@/hooks/useSearch";
+import useUserContext from "@/hooks/useUserContext";
 import InputText from "@/components/inputs/InputText";
 import BreedCard from "@/components/ui/BreedCard";
 import styles from "./page.module.scss";
 import Footer from "@/components/ui/Footer";
 import { Breed } from "@/const/types";
 import Loader from "@/components/ui/Loader";
+import { metricpilot } from "@/lib/metricpilot";
 
 const searchKeys = ["title"];
 
 export default function Home() {
+  const user = useUserContext();
   const [breeds, loading] = useGetAllBreeds();
 
   const [selectedBreeds, setSelectedBreeds] = React.useState(() => {
@@ -34,6 +37,11 @@ export default function Home() {
       const exists = prev.find(({ slug }) => slug === breed.slug);
       if (exists) return prev.filter(({ slug }) => slug !== breed.slug);
       if (prev.length >= 3) return prev;
+      metricpilot.capture("Breed Selected", {
+        breed_name: breed.title,
+        breed_id: breed.slug,
+        breeds_already_selected: prev.length,
+      });
       return [...prev, breed];
     });
   }, []);

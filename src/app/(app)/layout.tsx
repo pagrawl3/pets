@@ -10,6 +10,7 @@ import { UserContext } from "@/hooks/useUserContext";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
 import Loader from "@/components/ui/Loader";
+import { metricpilot } from "@/lib/metricpilot";
 
 export default function RootLayout({
   children,
@@ -22,6 +23,9 @@ export default function RootLayout({
   useIsLoggedIn((user) => {
     if (!user) router.push("/login");
     else {
+      metricpilot.identify(user.uid, {
+        email: user.email,
+      });
       setLoading(false);
       setUser(user);
     }

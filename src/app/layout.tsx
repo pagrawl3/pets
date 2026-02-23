@@ -4,6 +4,7 @@ import { Work_Sans } from "next/font/google";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import "@/const/globals.scss";
+import { MetricPilotProvider } from "@/lib/MetricPilotProvider";
 const workSans = Work_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <link rel="icon" type="image/png" href="/og.png" />
-      <body className={clsx(styles.body, workSans.className)}>{children}</body>
+      <body className={clsx(styles.body, workSans.className)}>
+        <MetricPilotProvider>{children}</MetricPilotProvider>
+      </body>
     </html>
   );
 }
